@@ -1,3 +1,5 @@
+// Package http implements the http-protocol js module for k6.
+// That module is used to make http requests.
 package http
 
 import (
