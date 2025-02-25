@@ -1,3 +1,5 @@
+// Package http implements the http-protocol js module for k6.
+// That module is used to make http requests.
 package http
 
 import (
@@ -40,6 +42,8 @@ func (*RootModule) NewModuleInstance(vu modules.VU) modules.Instance {
 	}
 }
 
+// Exports implements the [modules.Instance] interface and returns the exports
+// of the JS module.
 func (mi *ModuleInstance) Exports() modules.Exports {
 	return modules.Exports{Named: map[string]interface{}{}}
 }
