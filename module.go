@@ -8,7 +8,7 @@ import (
 
 // init is called by the Go runtime at application startup.
 func init() {
-	modules.Register("k6/x/http", New())
+	modules.Register("k6/x/net/http", New())
 }
 
 type (
