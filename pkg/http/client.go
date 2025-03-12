@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/grafana/sobek"
@@ -105,10 +106,14 @@ func (c *Client) createRequest(
 		arg.Export())
 }
 
+// This is a temp function just to end purpose of this PR and will be moved to Response object in future
+func (c *Client) parseBody(body io.Reader) ([]byte, error) {
+	_, res, err := dynamicRead(body.Read, 1*time.Second)
+	return res, err
+}
+
 // This function now just do simple get requests using url.
 func (c *Client) getAsync(arg sobek.Value) *sobek.Promise {
-	rt := c.Vu.Runtime()
-
 	enqCallback := c.Vu.RegisterCallback()
 	p, resolve, reject := c.Vu.Runtime().NewPromise()
 
@@ -131,7 +136,14 @@ func (c *Client) getAsync(arg sobek.Value) *sobek.Promise {
 					return er
 				}
 			}
-			if er := resolve(rt.ToValue(res)); er != nil {
+			// this is a temp behavior to showcase the behavior of get it will be replaced by Response object in future
+			body, er := c.parseBody(res.Body)
+			if er != nil {
+				if e := reject(er); e != nil {
+					return e
+				}
+			}
+			if er = resolve(string(body)); er != nil {
 				return er
 			}
 			return nil
