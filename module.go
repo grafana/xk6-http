@@ -3,7 +3,10 @@
 package http
 
 import (
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/modules"
+
+	xhttp "github.com/grafana/xk6-http/pkg/http"
 )
 
 // init is called by the Go runtime at application startup.
@@ -45,5 +48,21 @@ func (*RootModule) NewModuleInstance(vu modules.VU) modules.Instance {
 // Exports implements the [modules.Instance] interface and returns the exports
 // of the JS module.
 func (mi *ModuleInstance) Exports() modules.Exports {
-	return modules.Exports{Named: map[string]interface{}{}}
+	return modules.Exports{Named: map[string]interface{}{
+		"Client": mi.initClient,
+	}}
+}
+
+func (mi *ModuleInstance) initClient(sc sobek.ConstructorCall) *sobek.Object {
+	rt := mi.vu.Runtime()
+
+	c := &xhttp.Client{
+		Vu: mi.vu,
+		M:  make(map[string]sobek.Value),
+	}
+
+	c.Init()
+
+	o := rt.NewDynamicObject(c)
+	return o
 }

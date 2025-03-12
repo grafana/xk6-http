@@ -69,12 +69,11 @@ func (c *Client) Set(k string, val sobek.Value) bool {
 }
 
 // Init func defines data properties on Client struct as DynamicObject, Also can initialize other things.
-func (c *Client) Init() error {
+func (c *Client) Init() {
 	rt := c.Vu.Runtime()
 	c.id = uuid.New().String()
 
 	c.Set("get", rt.ToValue(c.getAsync))
-	return nil
 }
 
 // This function will do the actuall request and act as a wrapper to create custom Request and Response objects
