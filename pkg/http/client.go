@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 
@@ -89,7 +90,20 @@ func (c *Client) createRequest(
 	arg sobek.Value,
 	body io.Reader,
 ) (*http.Request, error) {
-	return nil, nil
+	addDefault := func(req *http.Request) {
+		// here we will add global/default settings for client, not included in this PR.
+	}
+
+	if v, ok := arg.Export().(string); ok {
+		req, err := http.NewRequest(method, v, body)
+		addDefault(req)
+
+		return req, err
+	}
+
+	return nil, fmt.Errorf(
+		"invalid input! couldn't make the request from argument: %+v",
+		arg.Export())
 }
 
 // This function now just do simple get requests using url.
