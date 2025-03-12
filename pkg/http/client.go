@@ -1,6 +1,7 @@
 package http
 
 import (
+	"io"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -68,7 +69,61 @@ func (c *Client) Set(k string, val sobek.Value) bool {
 
 // Init func defines data properties on Client struct as DynamicObject, Also can initialize other things.
 func (c *Client) Init() error {
+	rt := c.Vu.Runtime()
 	c.id = uuid.New().String()
 
+	c.Set("get", rt.ToValue(c.getAsync))
 	return nil
+}
+
+// This function will do the actuall request and act as a wrapper to create custom Request and Response objects
+func (c *Client) do(req *http.Request) (*http.Response, error) {
+	return c.Do(req)
+}
+
+// This function will act as a wrapper for each request we want to create from any function with any method,
+// so we can verify input of each function and wrap any global header defined in client, etc.
+// NOT VERY USEFUL FOR NOW BUT IT WILL BE IN FUTURE.
+func (c *Client) createRequest(
+	method string,
+	arg sobek.Value,
+	body io.Reader,
+) (*http.Request, error) {
+	return nil, nil
+}
+
+// This function now just do simple get requests using url.
+func (c *Client) getAsync(arg sobek.Value) *sobek.Promise {
+	rt := c.Vu.Runtime()
+
+	enqCallback := c.Vu.RegisterCallback()
+	p, resolve, reject := c.Vu.Runtime().NewPromise()
+
+	req, err := c.createRequest(http.MethodGet, arg, nil)
+	if err != nil {
+		enqCallback(func() error {
+			if er := reject(err); er != nil {
+				return er
+			}
+			return nil
+		})
+		return p
+	}
+
+	go func() {
+		res, err := c.do(req)
+		enqCallback(func() error {
+			if err != nil {
+				if er := reject(err); er != nil {
+					return er
+				}
+			}
+			if er := resolve(rt.ToValue(res)); er != nil {
+				return er
+			}
+			return nil
+		})
+	}()
+
+	return p
 }
