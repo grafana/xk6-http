@@ -6,10 +6,11 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/grafana/sobek v0.0.0-20241024150027-d91f02b05e9b
 	github.com/stretchr/testify v1.10.0
-	go.k6.io/k6 v0.57.0
+	go.k6.io/k6 v0.54.1-0.20241025083358-192a49e1c20d
 )
 
 require (
+	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
@@ -19,12 +20,16 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
+	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mccutchen/go-httpbin v1.1.2-0.20190116014521-c5cb2f4802fa // indirect
 	github.com/mstoykov/atlas v0.0.0-20220811071828-388f114305dd // indirect
+	github.com/mstoykov/k6-taskqueue-lib v0.1.0 // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.36.2 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -39,6 +44,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.31.0 // indirect
 	go.opentelemetry.io/otel/trace v1.31.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.3.1 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
