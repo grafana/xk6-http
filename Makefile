@@ -44,7 +44,7 @@ check: lint test
 
 ## test: Executes any unit tests.
 test:
-	go test -cover -race ./...
+	go test -v -cover -race ./...
 
 .PHONY: build clean format help test lint check check-linter-version linter-config
 
