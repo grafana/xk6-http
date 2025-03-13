@@ -7,6 +7,8 @@ require (
 	github.com/grafana/sobek v0.0.0-20241024150027-d91f02b05e9b
 	github.com/stretchr/testify v1.10.0
 	go.k6.io/k6 v0.54.1-0.20241025083358-192a49e1c20d
+	go.uber.org/goleak v1.3.0
+	gopkg.in/guregu/null.v3 v3.3.0
 )
 
 require (
@@ -53,6 +55,5 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241015192408-796eee8c2d53 // indirect
 	google.golang.org/grpc v1.69.4 // indirect
 	google.golang.org/protobuf v1.36.3 // indirect
-	gopkg.in/guregu/null.v3 v3.3.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
