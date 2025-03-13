@@ -59,3 +59,16 @@ func newTestState(t testing.TB) testState {
 		module:  m.(*ModuleInstance),
 	}
 }
+
+func TestBasicGet(t *testing.T) {
+	t.Parallel()
+	ts := newTestState(t)
+	sr := ts.tb.Replacer.Replace
+	// TODO: await for get request, i don't know how to run it yet becuase it gives me unexpected token while running tests and using 'await' keyword
+	_, err := ts.runtime.RunOnEventLoop(sr(`
+  	const client = new Client();
+  	const response = client.get('https://httpbin.test.k6.io/get');
+	`))
+
+	require.NoError(t, err)
+}
