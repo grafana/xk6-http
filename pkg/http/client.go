@@ -18,7 +18,7 @@ import (
 //
 // you can see more usage examples in js through examples dir.
 type Client struct {
-	// The http.Client struct to have all the functionalities of a http.Client in Client struct
+	// Client extends http.Client struct to have all the functionalities of a http.Client in Client struct
 	http.Client
 
 	// id is the unique identifier for each instance of Client object in js script
@@ -27,12 +27,13 @@ type Client struct {
 	// Multiple vus in k6 can create multiple Client objects so we need to have access the vu Runtime, etc.
 	Vu modules.VU
 
+	// M is the map needed for implementing sobek.DynamicObject
 	M map[string]sobek.Value
 
 	// Params is the way to config the global params for Client object to do requests.
 	// params *Clientparams
 
-	// eventListeners interfaces.EventListeners
+	// eventListeners EventListeners
 }
 
 var _ sobek.DynamicObject = &Client{}
