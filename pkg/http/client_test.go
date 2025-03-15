@@ -60,7 +60,7 @@ func newTestState(t testing.TB) testState {
 	}
 }
 
-func TestBasicGet(t *testing.T) {
+func TestClientGet(t *testing.T) {
 	t.Parallel()
 	ts := newTestState(t)
 	sr := ts.tb.Replacer.Replace
