@@ -22,6 +22,7 @@ func generateLongContent() ([]byte, error) {
 }
 
 func TestDynamicRead(t *testing.T) {
+	t.Parallel()
 	type testCase struct {
 		readFn  func([]byte) (int, error)
 		timeout time.Duration
@@ -32,6 +33,7 @@ func TestDynamicRead(t *testing.T) {
 	}
 
 	t.Run("Read long and random len content", func(t *testing.T) {
+		t.Parallel()
 		tests := []testCase{}
 		for range 3 {
 			content, err := generateLongContent()
@@ -47,6 +49,7 @@ func TestDynamicRead(t *testing.T) {
 
 				expectedRes: content,
 				expectedLen: reader.Len(),
+				error:       nil,
 			})
 		}
 

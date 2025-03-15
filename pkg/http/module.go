@@ -44,7 +44,7 @@ func (mi *ModuleInstance) Exports() modules.Exports {
 	}}
 }
 
-func (mi *ModuleInstance) initClient(sc sobek.ConstructorCall) *sobek.Object {
+func (mi *ModuleInstance) initClient(_ sobek.ConstructorCall) *sobek.Object {
 	rt := mi.vu.Runtime()
 
 	c := &Client{
