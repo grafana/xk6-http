@@ -102,7 +102,7 @@ func (c *Client) createRequest(
 		arg.Export())
 }
 
-// This is a temp function just to end purpose of this PR and will be moved to Response object in future
+// FIXME: move to Response
 func (c *Client) parseBody(body io.Reader) ([]byte, error) {
 	_, res, err := dynamicRead(body.Read, 1*time.Second)
 	return res, err
